@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IMPERVIA GROUP — Elevating Luxury</title>
+<link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Oxygen:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a08;
+    --gold-light: #d4a84b;
+    --gold-mid: #b8892e;
+    --gold-dark: #8a6520;
+    --cream: #fafaf8;
+    --cream-2: #f0ede6;
+    --grey: #9a9690;
+    --white: #ffffff;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--cream);
+    font-family: 'Oxygen', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ─── GOLD GRADIENT UTILITY ─── */
+  .gold {
+    background: linear-gradient(135deg, #c9953a 0%, #e8c97a 40%, #d4a84b 60%, #a07030 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 24px 60px;
+    background: linear-gradient(to bottom, rgba(10,10,8,0.95), transparent);
+    transition: background 0.4s;
+  }
+  nav.scrolled { background: rgba(10,10,8,0.97); border-bottom: 1px solid rgba(212,168,75,0.15); }
+
+  .nav-logo {
+    font-family: 'Tenor Sans', sans-serif;
+    font-size: 13px;
+    letter-spacing: 4px;
+    color: var(--cream);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--gold-light); }
+
+  .nav-links { display: flex; gap: 40px; list-style: none; }
+  .nav-links a {
+    font-family: 'Oxygen', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    color: var(--grey);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold-light); }
+
+  /* ─── HERO ─── */
+  #hero {
+    height: 100vh;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: flex-start;
+    padding: 0 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 70% 40%, rgba(212,168,75,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse at 20% 80%, rgba(212,168,75,0.04) 0%, transparent 50%),
+      var(--black);
+  }
+
+  /* Animated grid lines */
+  .hero-grid {
+    position: absolute; inset: 0; pointer-events: none;
+    background-image:
+      linear-gradient(rgba(212,168,75,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(212,168,75,0.04) 1px, transparent 1px);
+    background-size: 80px 80px;
+    animation: gridDrift 20s linear infinite;
+  }
+  @keyframes gridDrift { from { transform: translateY(0); } to { transform: translateY(80px); } }
+
+  .hero-line {
+    position: absolute; top: 0; right: 200px;
+    width: 1px; height: 100%;
+    background: linear-gradient(to bottom, transparent, rgba(212,168,75,0.3) 30%, rgba(212,168,75,0.3) 70%, transparent);
+    animation: lineFade 3s ease-in-out infinite alternate;
+  }
+  @keyframes lineFade { from { opacity: 0.3; } to { opacity: 0.8; } }
+
+  .hero-content { position: relative; z-index: 1; max-width: 700px; }
+
+  .hero-eyebrow {
+    font-family: 'Oxygen', sans-serif;
+    font-size: 10px;
+    letter-spacing: 5px;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 1s 0.2s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Tenor Sans', sans-serif;
+    font-size: clamp(52px, 7vw, 96px);
+    line-height: 1.0;
+    letter-spacing: -1px;
+    color: var(--cream);
+    margin-bottom: 8px;
+    opacity: 0;
+    animation: fadeUp 1s 0.4s forwards;
+  }
+
+  .hero-title-italic {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(56px, 7.5vw, 104px);
+    line-height: 1.0;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeUp 1s 0.6s forwards;
+  }
+
+  .hero-sub {
+    font-family: 'Oxygen', sans-serif;
+    font-size: 14px;
+    line-height: 1.9;
+    color: var(--grey);
+    max-width: 480px;
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 1s 0.8s forwards;
+  }
+
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 12px;
+    font-family: 'Oxygen', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--black);
+    background: linear-gradient(135deg, #c9953a, #e8c97a, #d4a84b);
+    padding: 16px 40px;
+    text-decoration: none;
+    transition: all 0.3s;
+    opacity: 0;
+    animation: fadeUp 1s 1s forwards;
+  }
+  .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(212,168,75,0.3); }
+  .hero-cta-ghost {
+    display: inline-flex; align-items: center; gap: 12px;
+    font-family: 'Oxygen', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    border: 1px solid rgba(212,168,75,0.4);
+    padding: 16px 40px;
+    text-decoration: none;
+    transition: all 0.3s;
+    margin-left: 16px;
+    opacity: 0;
+    animation: fadeUp 1s 1.1s forwards;
+  }
+  .hero-cta-ghost:hover { border-color: var(--gold-light); background: rgba(212,168,75,0.05); }
+
+  .hero-scroll {
+    position: absolute; bottom: 40px; left: 60px;
+    font-size: 10px; letter-spacing: 3px; color: var(--grey);
+    text-transform: uppercase;
+    display: flex; align-items: center; gap: 16px;
+    opacity: 0; animation: fadeIn 1s 1.5s forwards;
+  }
+  .hero-scroll::before {
+    content: '';
+    display: block; width: 40px; height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold-light));
+  }
+
+  .hero-stats {
+    position: absolute; right: 60px; bottom: 80px;
+    display: flex; flex-direction: column; gap: 32px;
+    text-align: right; z-index: 1;
+    opacity: 0; animation: fadeIn 1s 1.3s forwards;
+  }
+  .stat-num {
+    font-family: 'Tenor Sans', sans-serif;
+    font-size: 28px;
+    color: var(--gold-light);
+    display: block;
+  }
+  .stat-label { font-size: 10px; letter-spacing: 2px; color: var(--grey); text-transform: uppercase; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  /* ─── SECTIONS ─── */
+  section { padding: 120px 60px; }
+
+  .section-label {
+    font-size: 10px; letter-spacing: 4px;
+    color: var(--gold-light); text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .section-label::before {
+    content: ''; display: block; width: 30px; height: 1px;
+    background: var(--gold-light);
+  }
+
+  h2 {
+    font-family: 'Tenor Sans', sans-serif;
+    font-size: clamp(36px, 4vw, 56px);
+    line-height: 1.1;
+    color: var(--cream);
+    margin-bottom: 24px;
+  }
+
+  h2 em {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.1em;
+    font-weight: 300;
+  }
+
+  /* ─── ABOUT ─── */
+  #about {
+    background: var(--black);
+    border-top: 1px solid rgba(212,168,75,0.1);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+    margin-top: 60px;
+  }
+
+  .about-text p {
+    font-size: 15px; line-height: 1.9;
+    color: rgba(250,250,248,0.65);
+    margin-bottom: 20px;
+  }
+
+  .about-pillars {
+    display: flex; flex-direction: column; gap: 2px;
+  }
+
+  .pillar {
+    padding: 28px 32px;
+    border: 1px solid rgba(212,168,75,0.08);
+    transition: all 0.4s;
+    position: relative; overflow: hidden;
+  }
+  .pillar::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+    background: linear-gradient(to bottom, #c9953a, #e8c97a);
+    transform: scaleY(0); transform-origin: bottom;
+    transition: transform 0.4s;
+  }
+  .pillar:hover { border-color: rgba(212,168,75,0.2); background: rgba(212,168,75,0.03); }
+  .pillar:hover::before { transform: scaleY(1); }
+  .pillar-title {
+    font-family: 'Tenor Sans', sans-serif;
+    font-size: 13px; letter-spacing: 2px;
+    color: var(--gold-light); margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+  .pillar p { font-size: 13px; line-height: 1.7; color: var(--grey); }
+
+  /* ─── SECTORS ─── */
+  #sectors {
+    background: linear-gradient(to bottom, var(--black), #0d0d0a);
+  }
+
+  .sectors-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 60px;
+  }
+
+  .sector-card {
+    padding: 48px 40px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(212,168,75,0.08);
+    transition: all 0.5s;
+    position: relative; overflow: hidden;
+    cursor: default;
+  }
+  .sector-card::after {
+    content: ''; position: absolute;
+    bottom: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, #d4a84b, transparent);
+    transform: scaleX(0); transition: transform 0.5s;
+  }
+  .sector-card:hover { background: rgba(212,168,75,0.04); border-color: rgba(212,168,75,0.2); transform: translateY(-4px); }
+  .sector-card:hover::after { transform: scaleX(1); }
+
+  .sector-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 64px; font-weight: 300;
+    color: rgba(212,168,75,0.12);
+    line-height: 1; margin-bottom: 24px;
+    transition: color 0.4s;
+  }
+  .sector-card:hover .sector-num { color: rgba(212,168,75,0.25); }
+
+  .sector-title {
+    font-family: 'Tenor Sans', sans-serif;
+    font-size: 18px; letter-spacing: 2px;
+    color: var(--cream); margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+  .sector-sub {
+    font-size: 11px; letter-spacing: 2px;
+    color: var(--gold-light); text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .sector-desc { font-size: 14px; line-height: 1.8; color: var(--grey); margin-bottom: 28px; }
+
+  .sector-features { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .sector-features li {
+    font-size: 12px; letter-spacing: 1px; color: rgba(250,250,248,0.5);
+    padding-left: 16px; position: relative;
+  }
+  .sector-features li::before {
+    content: '—'; position: absolute; left: 0;
+    color: var(--gold-light); font-size: 10px;
+  }
+
+  /* ─── CALCULATOR ─── */
+  #calculator {
+    background: #0d0d0a;
+    border-top: 1px solid rgba(212,168,75,0.1);
+    border-bottom: 1px solid rgba(212,168,75,0.1);
+  }
+
+  .calc-container {
+    max-width: 900px; margin: 60px auto 0;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(212,168,75,0.15);
+    padding: 56px;
+  }
+
+  .calc-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+
+  .calc-field { display: flex; flex-direction: column; gap: 8px; }
+  .calc-label {
+    font-size: 10px; letter-spacing: 3px;
+    color: var(--gold-light); text-transform: uppercase;
+  }
+
+  .calc-select, .calc-input {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(212,168,75,0.2);
+    color: var(--cream);
+    font-family: 'Oxygen', sans-serif;
+    font-size: 14px; font-weight: 300;
+    padding: 14px 18px;
+    outline: none;
+    transition: border-color 0.3s;
+    -webkit-appearance: none;
+    cursor: pointer;
+  }
+  .calc-select:focus, .calc-input:focus { border-color: var(--gold-light); }
+  .calc-select option { background: #1a1a16; color: var(--cream); }
+
+  .calc-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #c9953a, #e8c97a, #d4a84b);
+    border: none; color: var(--black);
+    font-family: 'Tenor Sans', sans-serif;
+    font-size: 12px; letter-spacing: 4px;
+    text-transform: uppercase;
+    padding: 18px;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 8px;
+  }
+  .calc-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(212,168,75,0.25); }
+
+  .calc-result {
+    margin-top: 32px;
+    padding: 32px;
+    background: rgba(212,168,75,0.05);
+    border: 1px solid rgba(212,168,75,0.2);
+    display: none;
+  }
+  .calc-result.visible { display: block; animation: fadeIn 0.5s forwards; }
+
+  .result-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .result-item { text-align: center; }
+  .result-num {
+    font-family: 'Tenor Sans', sans-serif;
+    font-size: 28px; color: var(--gold-light);
+    display: block; margin-bottom: 6px;
+  }
+  .result-label { font-size: 10px; letter-spacing: 2px; color: var(--grey); text-transform: uppercase; }
+
+  .result-note {
+    margin-top: 24px; padding-top: 24px;
+    border-top: 1px solid rgba(212,168,75,0.1);
+    font-size: 12px; color: var(--grey); text-align: center;
+    line-height: 1.7;
+  }
+
+  /* ─── FOUNDERS ─── */
+  #founders {
+    background: var(--black);
+  }
+
+  .founders-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-top: 60px;
+  }
+
+  .founder-card {
+    padding: 48px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(212,168,75,0.08);
+    transition: all 0.4s;
+  }
+  .founder-card:hover { border-color: rgba(212,168,75,0.2); background: rgba(212,168,75,0.03); }
+
+  .founder-role {
+    font-size: 10px; letter-spacing: 3px;
+    color: var(--gold-light); text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .founder-name {
+    font-family: 'Tenor Sans', sans-serif;
+    font-size: 26px; letter-spacing: 1px;
+    color: var(--cream); margin-bottom: 8px;
+  }
+
+  .founder-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 16px; color: var(--grey);
+    margin-bottom: 28px;
+  }
+
+  .founder-bio { font-size: 14px; line-height: 1.9; color: rgba(250,250,248,0.6); margin-bottom: 28px; }
+
+  .founder-achievements { display: flex; flex-direction: column; gap: 10px; }
+  .achievement {
+    display: flex; align-items: center; gap: 14px;
+    font-size: 12px; color: rgba(250,250,248,0.5);
+  }
+  .achievement-dot {
+    width: 4px; height: 4px; border-radius: 50%;
+    background: var(--gold-light); flex-shrink: 0;
+  }
+
+  /* ─── CONTACT ─── */
+  #contact {
+    background: linear-gradient(135deg, #0d0d0a, var(--black));
+    text-align: center;
+  }
+
+  .contact-inner { max-width: 600px; margin: 0 auto; }
+  .contact-inner p { font-size: 15px; line-height: 1.9; color: var(--grey); margin-bottom: 48px; }
+
+  .contact-form { display: flex; flex-direction: column; gap: 16px; text-align: left; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  .form-input {
+    width: 100%;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(212,168,75,0.15);
+    color: var(--cream);
+    font-family: 'Oxygen', sans-serif;
+    font-size: 14px; font-weight: 300;
+    padding: 16px 20px;
+    outline: none;
+    transition: border-color 0.3s;
+    resize: none;
+  }
+  .form-input:focus { border-color: var(--gold-light); }
+  .form-input::placeholder { color: rgba(154,150,144,0.5); }
+
+  .form-btn {
+    background: linear-gradient(135deg, #c9953a, #e8c97a, #d4a84b);
+    border: none; color: var(--black);
+    font-family: 'Tenor Sans', sans-serif;
+    font-size: 11px; letter-spacing: 4px;
+    text-transform: uppercase;
+    padding: 18px 48px;
+    cursor: pointer; transition: all 0.3s;
+    align-self: center; margin-top: 8px;
+  }
+  .form-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(212,168,75,0.3); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 40px 60px;
+    border-top: 1px solid rgba(212,168,75,0.1);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer-logo {
+    font-family: 'Tenor Sans', sans-serif;
+    font-size: 12px; letter-spacing: 4px; color: var(--cream);
+  }
+  .footer-logo span { color: var(--gold-light); }
+  .footer-copy { font-size: 11px; color: rgba(154,150,144,0.5); letter-spacing: 1px; }
+  .footer-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 14px; color: var(--gold-light);
+  }
+
+  /* ─── DIVIDER ─── */
+  .gold-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(212,168,75,0.4), transparent);
+    margin: 0 60px;
+  }
+
+  /* ─── SCROLL REVEAL ─── */
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s, transform 0.8s; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── MOBILE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 20px 24px; }
+    .nav-links { display: none; }
+    section { padding: 80px 24px; }
+    #hero { padding: 0 24px; }
+    .hero-stats { display: none; }
+    .about-grid, .sectors-grid, .founders-grid { grid-template-columns: 1fr; gap: 2px; }
+    .calc-row { grid-template-columns: 1fr; }
+    .result-grid { grid-template-columns: 1fr; gap: 16px; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 16px; text-align: center; }
+    .calc-container { padding: 32px 24px; }
+    .hero-line { display: none; }
+    .hero-grid { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">IMPERVIA <span>GROUP</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#sectors">Sectors</a></li>
+    <li><a href="#calculator">Fleet Charter</a></li>
+    <li><a href="#founders">Founders</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-line"></div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">Est. — Ultra-Premium Group</p>
+    <h1 class="hero-title">ELEVATING</h1>
+    <h1 class="hero-title-italic gold">Luxury.</h1>
+    <p class="hero-sub">Impervia Group operates at the confluence of ultra-premium real estate, private aviation, and strategic defence — delivering exceptional assets and experiences for the world's most discerning clients.</p>
+    <div>
+      <a href="#contact" class="hero-cta">Request a Consultation</a>
+      <a href="#sectors" class="hero-cta-ghost">Our Sectors</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll">Scroll to Explore</div>
+
+  <div class="hero-stats">
+    <div>
+      <span class="stat-num gold">$1B+</span>
+      <span class="stat-label">Assets Scaled</span>
+    </div>
+    <div>
+      <span class="stat-num gold">€130M</span>
+      <span class="stat-label">Flagship Project</span>
+    </div>
+    <div>
+      <span class="stat-num gold">3+</span>
+      <span class="stat-label">Decades Experience</span>
+    </div>
+  </div>
+</section>
+
+<div class="gold-divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">Who We Are</div>
+  <h2>Where <em>precision</em><br>meets prestige</h2>
+
+  <div class="about-grid reveal">
+    <div class="about-text">
+      <p>Impervia Group is an integrated development and investment platform specializing in ultra-premium real estate, private aviation, and strategic defence sectors. We take projects from concept to completion, delivering assets that define a new standard of excellence.</p>
+      <p>Our approach is rooted in long-term partnerships — with landowners, luxury brands, and institutional investors — creating developments that generate lasting value. We target ultra-high-net-worth individuals and institutional partners who demand unparalleled quality.</p>
+      <p>Founded by seasoned executives with over three decades of combined experience managing multi-billion dollar portfolios across Eastern Europe and beyond, Impervia brings a rare combination of financial discipline, strategic vision, and luxury sensibility.</p>
+    </div>
+
+    <div class="about-pillars">
+      <div class="pillar">
+        <div class="pillar-title">Experience-Driven Development</div>
+        <p>We create vibrant social and lifestyle hubs that resonate with the desires of ultra-high-net-worth individuals, elevating the residential experience through carefully planned environments.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-title">Condo Hotel Model</div>
+        <p>Our innovative model combines luxury accommodations with ownership opportunities, ensuring residents enjoy five-star services while benefitting from prime location value appreciation.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-title">Luxury Brand Integration</div>
+        <p>By integrating prestigious luxury brands into our developments, Impervia enhances exclusivity and design, attracting discerning clients seeking unparalleled quality.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTORS -->
+<section id="sectors">
+  <div class="section-label">Our Sectors</div>
+  <h2>Three pillars of<br><em>exceptional value</em></h2>
+
+  <div class="sectors-grid reveal">
+    <div class="sector-card">
+      <div class="sector-num">01</div>
+      <div class="sector-title">Real Estate</div>
+      <div class="sector-sub">Luxury & Hospitality</div>
+      <p class="sector-desc">We develop and manage ultra-premium residential and hotel projects in prime locations, partnering with world-renowned luxury brands to deliver assets that transcend conventional real estate.</p>
+      <ul class="sector-features">
+        <li>Condo hotel developments</li>
+        <li>Luxury residential communities</li>
+        <li>Landowner joint ventures</li>
+        <li>Asset management & optimization</li>
+        <li>International luxury brand partnerships</li>
+      </ul>
+    </div>
+
+    <div class="sector-card">
+      <div class="sector-num">02</div>
+      <div class="sector-title">Aviation</div>
+      <div class="sector-sub">Private & Charter Fleet</div>
+      <p class="sector-desc">Impervia Aviation manages a curated fleet of 12 private aircraft, offering bespoke charter solutions for discerning clients who demand the highest standards of comfort, discretion, and reliability.</p>
+      <ul class="sector-features">
+        <li>Private charter & management</li>
+        <li>Fleet of 12 aircraft</li>
+        <li>Global route network</li>
+        <li>VIP concierge services</li>
+        <li>Aircraft acquisition advisory</li>
+      </ul>
+    </div>
+
+    <div class="sector-card">
+      <div class="sector-num">03</div>
+      <div class="sector-title">Defence</div>
+      <div class="sector-sub">Strategic & Technology</div>
+      <p class="sector-desc">Through strategic partnerships and deep industry expertise, Impervia operates in the defence technology sector — connecting innovation with institutional demand across key global markets.</p>
+      <ul class="sector-features">
+        <li>Defence technology solutions</li>
+        <li>Strategic procurement advisory</li>
+        <li>Government & institutional relations</li>
+        <li>Dual-use technology investment</li>
+        <li>International market access</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CALCULATOR -->
+<section id="calculator">
+  <div class="section-label">Impervia Aviation</div>
+  <h2>Private Flight<br><em>Charter Calculator</em></h2>
+  <p style="color: var(--grey); font-size: 14px; margin-top: 12px; max-width: 500px;">Estimate your private charter cost across our fleet of 12 aircraft. Prices are indicative — contact us for a tailored quote.</p>
+
+  <div class="calc-container reveal">
+    <div class="calc-row">
+      <div class="calc-field">
+        <label class="calc-label">Departure</label>
+        <select class="calc-select" id="departure">
+          <option value="">Select departure city</option>
+          <option value="IST">Istanbul (IST)</option>
+          <option value="LHR">London (LHR)</option>
+          <option value="CDG">Paris (CDG)</option>
+          <option value="DXB">Dubai (DXB)</option>
+          <option value="JFK">New York (JFK)</option>
+          <option value="GVA">Geneva (GVA)</option>
+          <option value="FCO">Rome (FCO)</option>
+          <option value="ZRH">Zurich (ZRH)</option>
+          <option value="MXP">Milan (MXP)</option>
+          <option value="MCO">Miami (MCO)</option>
+          <option value="DOH">Doha (DOH)</option>
+          <option value="SIN">Singapore (SIN)</option>
+        </select>
+      </div>
+      <div class="calc-field">
+        <label class="calc-label">Destination</label>
+        <select class="calc-select" id="destination">
+          <option value="">Select destination</option>
+          <option value="IST">Istanbul (IST)</option>
+          <option value="LHR">London (LHR)</option>
+          <option value="CDG">Paris (CDG)</option>
+          <option value="DXB">Dubai (DXB)</option>
+          <option value="JFK">New York (JFK)</option>
+          <option value="GVA">Geneva (GVA)</option>
+          <option value="FCO">Rome (FCO)</option>
+          <option value="ZRH">Zurich (ZRH)</option>
+          <option value="MXP">Milan (MXP)</option>
+          <option value="MCO">Miami (MCO)</option>
+          <option value="DOH">Doha (DOH)</option>
+          <option value="SIN">Singapore (SIN)</option>
+        </select>
+      </div>
+      <div class="calc-field">
+        <label class="calc-label">Aircraft Type</label>
+        <select class="calc-select" id="aircraft">
+          <option value="">Select aircraft</option>
+          <option value="vlight">Very Light Jet — 4 pax</option>
+          <option value="light">Light Jet — 6 pax</option>
+          <option value="midlight">Mid-Light Jet — 7 pax</option>
+          <option value="midsize">Midsize Jet — 8 pax</option>
+          <option value="super">Super Midsize — 9 pax</option>
+          <option value="heavy">Heavy Jet — 12 pax</option>
+          <option value="ultra">Ultra Long Range — 14 pax</option>
+          <option value="vip737">VIP Boeing 737 — 30 pax</option>
+          <option value="acj">Airbus ACJ318 — 18 pax</option>
+          <option value="falcon">Falcon 8X — 10 pax</option>
+          <option value="g650">Gulfstream G650 — 13 pax</option>
+          <option value="global7500">Global 7500 — 14 pax</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="calc-row" style="grid-template-columns: 1fr 1fr;">
+      <div class="calc-field">
+        <label class="calc-label">Passengers</label>
+        <input type="number" class="calc-input" id="passengers" min="1" max="30" placeholder="e.g. 4" value="">
+      </div>
+      <div class="calc-field">
+        <label class="calc-label">Journey Type</label>
+        <select class="calc-select" id="journeytype">
+          <option value="oneway">One Way</option>
+          <option value="return">Return</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="calc-btn" onclick="calculateFlight()">Calculate Estimate</button>
+
+    <div class="calc-result" id="calcResult">
+      <div class="result-grid">
+        <div class="result-item">
+          <span class="result-num" id="resultPrice">—</span>
+          <span class="result-label">Estimated Cost (USD)</span>
+        </div>
+        <div class="result-item">
+          <span class="result-num" id="resultFlight">—</span>
+          <span class="result-label">Flight Time</span>
+        </div>
+        <div class="result-item">
+          <span class="result-num" id="resultPax">—</span>
+          <span class="result-label">Cost per Passenger</span>
+        </div>
+      </div>
+      <p class="result-note">This is a preliminary estimate based on standard routing and aircraft positioning. Our aviation team will provide a precise, all-inclusive quote within 2 hours. <span style="color: var(--gold-light);">Contact us at aviation@theimperviagroup.com</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDERS -->
+<section id="founders">
+  <div class="section-label">Leadership</div>
+  <h2>Founders &<br><em>Partners</em></h2>
+
+  <div class="founders-grid reveal">
+    <div class="founder-card">
+      <div class="founder-role">Co-Founder & Chief Executive</div>
+      <div class="founder-name">Orlando Carlo Calumeno</div>
+      <div class="founder-title">Finance Executive & Strategic Growth Specialist</div>
+      <p class="founder-bio">Orlando is a seasoned finance executive with extensive experience in real estate and investment strategy. Previously serving as CFO at Net Holding, he brings deep expertise in large-scale portfolio management and institutional finance. He is also the founder of Merit International, where he pioneered groundbreaking development models across Eastern Europe.</p>
+      <div class="founder-achievements">
+        <div class="achievement"><div class="achievement-dot"></div>Managed $3.5B balance sheet at Net Holding</div>
+        <div class="achievement"><div class="achievement-dot"></div>Achieved $200M EBITDA growth</div>
+        <div class="achievement"><div class="achievement-dot"></div>Led Turkish National Lottery bid</div>
+        <div class="achievement"><div class="achievement-dot"></div>Co-created €130M Merit Starlit Budva asset</div>
+      </div>
+    </div>
+
+    <div class="founder-card">
+      <div class="founder-role">Co-Founder & Business Development</div>
+      <div class="founder-name">Doğan Murat Ergin</div>
+      <div class="founder-title">Business Development & Marketing Strategist</div>
+      <p class="founder-bio">Doğan is an accomplished business development professional with a distinguished background in finance and marketing. Having served as SVP at Net Holding and CMO at Merit International, he has a proven track record of driving market strategies that generate substantial growth and expand brand presence across competitive international markets.</p>
+      <div class="founder-achievements">
+        <div class="achievement"><div class="achievement-dot"></div>SVP at Net Holding</div>
+        <div class="achievement"><div class="achievement-dot"></div>CMO at Merit International</div>
+        <div class="achievement"><div class="achievement-dot"></div>Scaled assets from $25M seed to $1B</div>
+        <div class="achievement"><div class="achievement-dot"></div>Pioneered Eastern European market expansion</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner reveal">
+    <div class="section-label" style="justify-content: center;">Contact</div>
+    <h2 style="text-align: center;">Let's discuss how<br>we can <em>collaborate</em></h2>
+    <p>Whether you are a landowner seeking a strategic partner, an investor looking for premium opportunities, or a client seeking our aviation or defence expertise — we welcome the conversation.</p>
+
+    <form class="contact-form" onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <input type="text" class="form-input" placeholder="Full Name" required>
+        <input type="email" class="form-input" placeholder="Email Address" required>
+      </div>
+      <div class="form-row">
+        <input type="text" class="form-input" placeholder="Organisation">
+        <select class="form-input calc-select">
+          <option value="" style="color: rgba(154,150,144,0.5)">Area of Interest</option>
+          <option>Real Estate & Development</option>
+          <option>Private Aviation Charter</option>
+          <option>Defence Solutions</option>
+          <option>Investment Partnership</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <textarea class="form-input" rows="5" placeholder="Your message..."></textarea>
+      <button type="submit" class="form-btn">Send Message</button>
+    </form>
+
+    <p style="margin-top: 40px; font-size: 12px; color: rgba(154,150,144,0.5);">
+      theimperviagroup.com &nbsp;·&nbsp; info@theimperviagroup.com
+    </p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">IMPERVIA <span>GROUP</span></div>
+  <div class="footer-tagline">Elevating Luxury</div>
+  <div class="footer-copy">© 2025 Impervia Group. All rights reserved.</div>
+</footer>
+
+<script>
+  // Nav scroll
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  reveals.forEach(r => observer.observe(r));
+
+  // Flight calculator data
+  const distances = {
+    IST: { LHR: 2510, CDG: 2240, DXB: 2580, JFK: 9400, GVA: 2010, FCO: 1750, ZRH: 1980, MXP: 1870, MCO: 9600, DOH: 2040, SIN: 8100 },
+    LHR: { IST: 2510, CDG: 340, DXB: 5500, JFK: 5540, GVA: 750, FCO: 1440, ZRH: 790, MXP: 1010, MCO: 7100, DOH: 5100, SIN: 10840 },
+    CDG: { IST: 2240, LHR: 340, DXB: 5250, JFK: 5830, GVA: 490, FCO: 1100, ZRH: 490, MXP: 640, MCO: 7390, DOH: 4980, SIN: 10730 },
+    DXB: { IST: 2580, LHR: 5500, CDG: 5250, JFK: 11010, GVA: 5130, FCO: 4780, ZRH: 5110, MXP: 5050, MCO: 12100, DOH: 330, SIN: 5750 },
+    JFK: { IST: 9400, LHR: 5540, CDG: 5830, DXB: 11010, GVA: 6640, FCO: 7000, ZRH: 6580, MXP: 6870, MCO: 1320, DOH: 11100, SIN: 15350 },
+    GVA: { IST: 2010, LHR: 750, CDG: 490, DXB: 5130, JFK: 6640, FCO: 720, ZRH: 280, MXP: 300, MCO: 8000, DOH: 4860, SIN: 10700 },
+    FCO: { IST: 1750, LHR: 1440, CDG: 1100, DXB: 4780, JFK: 7000, GVA: 720, ZRH: 790, MXP: 530, MCO: 8460, DOH: 4380, SIN: 10300 },
+    ZRH: { IST: 1980, LHR: 790, CDG: 490, DXB: 5110, JFK: 6580, GVA: 280, FCO: 790, MXP: 300, MCO: 7930, DOH: 4820, SIN: 10640 },
+    MXP: { IST: 1870, LHR: 1010, CDG: 640, DXB: 5050, JFK: 6870, GVA: 300, FCO: 530, ZRH: 300, MCO: 8230, DOH: 4750, SIN: 10500 },
+    MCO: { IST: 9600, LHR: 7100, CDG: 7390, DXB: 12100, JFK: 1320, GVA: 8000, FCO: 8460, ZRH: 7930, MXP: 8230, DOH: 12200, SIN: 16000 },
+    DOH: { IST: 2040, LHR: 5100, CDG: 4980, DXB: 330, JFK: 11100, GVA: 4860, FCO: 4380, ZRH: 4820, MXP: 4750, MCO: 12200, SIN: 5850 },
+    SIN: { IST: 8100, LHR: 10840, CDG: 10730, DXB: 5750, JFK: 15350, GVA: 10700, FCO: 10300, ZRH: 10640, MXP: 10500, MCO: 16000, DOH: 5850 }
+  };
+
+  const aircraftData = {
+    vlight:   { speed: 700, ratePerHr: 3200,  name: 'Very Light Jet' },
+    light:    { speed: 750, ratePerHr: 4500,  name: 'Light Jet' },
+    midlight: { speed: 800, ratePerHr: 5500,  name: 'Mid-Light Jet' },
+    midsize:  { speed: 830, ratePerHr: 7000,  name: 'Midsize Jet' },
+    super:    { speed: 860, ratePerHr: 9500,  name: 'Super Midsize' },
+    heavy:    { speed: 880, ratePerHr: 13000, name: 'Heavy Jet' },
+    ultra:    { speed: 900, ratePerHr: 18000, name: 'Ultra Long Range' },
+    vip737:   { speed: 850, ratePerHr: 28000, name: 'VIP Boeing 737' },
+    acj:      { speed: 840, ratePerHr: 22000, name: 'Airbus ACJ318' },
+    falcon:   { speed: 920, ratePerHr: 20000, name: 'Falcon 8X' },
+    g650:     { speed: 940, ratePerHr: 24000, name: 'Gulfstream G650' },
+    global7500:{ speed: 950, ratePerHr: 26000, name: 'Global 7500' }
+  };
+
+  function calculateFlight() {
+    const dep = document.getElementById('departure').value;
+    const dest = document.getElementById('destination').value;
+    const ac = document.getElementById('aircraft').value;
+    const pax = parseInt(document.getElementById('passengers').value) || 1;
+    const journey = document.getElementById('journeytype').value;
+
+    if (!dep || !dest || !ac) {
+      alert('Please select departure, destination, and aircraft.');
+      return;
+    }
+    if (dep === dest) {
+      alert('Departure and destination cannot be the same.');
+      return;
+    }
+
+    const dist = distances[dep][dest];
+    const plane = aircraftData[ac];
+    const flightHrs = dist / plane.speed;
+    const multiplier = journey === 'return' ? 2 : 1;
+    const baseCost = flightHrs * plane.ratePerHr * multiplier;
+    const totalCost = Math.round(baseCost * 1.15); // 15% fees/landing
+    const costPerPax = Math.round(totalCost / pax);
+
+    const hrs = Math.floor(flightHrs * multiplier);
+    const mins = Math.round((flightHrs * multiplier - hrs) * 60);
+
+    document.getElementById('resultPrice').textContent = '$' + totalCost.toLocaleString();
+    document.getElementById('resultFlight').textContent = `${hrs}h ${mins}m`;
+    document.getElementById('resultPax').textContent = '$' + costPerPax.toLocaleString();
+
+    const result = document.getElementById('calcResult');
+    result.classList.add('visible');
+    result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.form-btn');
+    btn.textContent = 'Message Sent — We\'ll be in touch';
+    btn.style.background = 'rgba(212,168,75,0.15)';
+    btn.style.color = 'var(--gold-light)';
+    btn.style.border = '1px solid rgba(212,168,75,0.3)';
+    e.target.querySelectorAll('input, textarea, select').forEach(i => i.disabled = true);
+  }
+</script>
+</body>
+</html>
