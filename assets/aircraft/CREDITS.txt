@@ -1,0 +1,16 @@
+Aircraft image sources for index_impervia_final_export_v2.html
+
+These images were downloaded from Wikimedia Commons via Special:FilePath and resized by Commons at delivery time. Please keep this credits file with the site package.
+
+- cessna-citation-cj3.jpg: "Cessna Citation CJ3.jpg", Wikimedia Commons, author Ijet Aviation.
+- cessna-citation-xls-plus.jpg: "Cessna Citation XLS (35328012246).jpg", Wikimedia Commons, author Transport Pixels.
+- cessna-citation-sovereign.jpg: "Cessna Citation Sovereign.JPG", Wikimedia Commons.
+- gulfstream-g200.jpg: "Gulfstream G200 (2417324939).jpg", Wikimedia Commons, author Eddie Maloney.
+- gulfstream-g280.jpg: uses "Gulfstream G200 (2417324939).jpg", Wikimedia Commons, author Eddie Maloney, as a super-midsize jet visual.
+- gulfstream-g450.jpg: "Gulfstream G450 (1).JPG", Wikimedia Commons, author Spartan7W.
+- gulfstream-g550.jpg: "Gulfstream G550.jpg", Wikimedia Commons, author Marek Slusarczyk.
+- bombardier-challenger-300.jpg: "Bombardier Challenger.JPG", Wikimedia Commons, author Dtom, public domain.
+- bombardier-challenger-350.jpg: "Bombardier Challenger 350 N1980Z.jpg", Wikimedia Commons.
+- dassault-falcon-2000.jpg: "Dassault Falcon 2000S.jpg", Wikimedia Commons, author Alec Wilson.
+- airbus-acj319-vip.jpg: "Comlux Airbus ACJ319 VVIP interior.jpg", Wikimedia Commons, author Comlux Aviation Group.
+- agustawestland-aw139.jpg: "AgustaWestland AW139.jpg", Wikimedia Commons, author Duch.seb.
