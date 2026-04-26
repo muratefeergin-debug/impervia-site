@@ -320,6 +320,26 @@ footer{padding:56px 60px 28px;border-top:1px solid rgba(201,149,58,.1);backgroun
 @media(max-width:900px){.mobile-menu{position:fixed;top:78px;left:20px;right:20px;z-index:500;display:flex;flex-direction:column;background:#080806;border:1px solid rgba(201,149,58,.32);box-shadow:0 24px 80px rgba(0,0,0,.68);opacity:0;transform:translateY(-12px);pointer-events:none;transition:opacity .25s,transform .25s}.mobile-menu a{padding:16px 20px;border-bottom:1px solid rgba(201,149,58,.1);font-size:11px;letter-spacing:2.4px;text-transform:uppercase;text-decoration:none;color:#e8e3d8}.mobile-menu a:last-child{border-bottom:none;color:#080806;background:var(--gg);text-align:center}body.nav-open .mobile-menu{opacity:1;transform:translateY(0);pointer-events:auto}}
 @media(max-width:600px){.ret,.joyst,.ast{grid-template-columns:1fr}.ftg{grid-template-columns:1fr}.fb{flex-direction:column;gap:14px;text-align:center}.flg{grid-template-columns:1fr}.sg{grid-template-columns:1fr}}
 @media(max-width:600px){.ztr-products,.ztr-specs{grid-template-columns:1fr}.ztr-img{height:210px}}
+
+
+/* PATRON REQUEST: wordless symbol presence */
+#hero .hero-wm{content:url('./assets/impervia-symbol-gold.png');right:-5vw;height:92vh;opacity:.105;filter:drop-shadow(0 0 70px rgba(201,149,58,.16));mix-blend-mode:screen}
+#about,#sectors,#re,#cs,#aviation,#def,#joy,#founders,#inq{position:relative;overflow:hidden}
+.brand-mark-bg{position:absolute;right:5%;top:50%;transform:translateY(-50%);width:min(34vw,440px);height:auto;opacity:.055;filter:blur(1px);pointer-events:none;z-index:0;mix-blend-mode:screen}
+#about > *:not(.brand-mark-bg),#sectors > *:not(.brand-mark-bg),#re > *:not(.brand-mark-bg),#cs > *:not(.brand-mark-bg),#aviation > *:not(.brand-mark-bg),#def > *:not(.brand-mark-bg),#joy > *:not(.brand-mark-bg),#founders > *:not(.brand-mark-bg),#inq > *:not(.brand-mark-bg){position:relative;z-index:2}
+.lstamp{position:relative;padding-left:54px}
+.lstamp::before{content:'';position:absolute;left:0;top:0;width:34px;height:34px;background:url('./assets/impervia-symbol-gold.png') center/contain no-repeat;opacity:.95;filter:drop-shadow(0 8px 22px rgba(201,149,58,.18))}
+.lstamp img{content:url('./assets/impervia-symbol-gold.png');height:34px;width:34px;object-fit:contain;opacity:.95}
+.sc::before{content:'';position:absolute;right:18px;top:18px;width:54px;height:54px;background:url('./assets/impervia-symbol-gold.png') center/contain no-repeat;opacity:.09;transition:opacity .35s,transform .35s;pointer-events:none}
+.sc:hover::before{opacity:.18;transform:scale(1.06)}
+.retc,.ztr-card,.joys,.foundc,.inqc{position:relative;overflow:hidden}
+.retc::before,.ztr-card::before,.joys::before,.foundc::before,.inqc::before{content:'';position:absolute;right:16px;top:16px;width:46px;height:46px;background:url('./assets/impervia-symbol-gold.png') center/contain no-repeat;opacity:.06;pointer-events:none}
+.fc-logo{content:url('./assets/impervia-symbol-gold.png');height:34px;opacity:.96;filter:drop-shadow(0 8px 20px rgba(0,0,0,.65))}
+.cs-logo{content:url('./assets/impervia-symbol-gold.png');height:150px;opacity:.92;filter:drop-shadow(0 18px 46px rgba(201,149,58,.18))}
+footer{position:relative;overflow:hidden}
+.footer-symbol{position:absolute;right:5%;top:28px;width:260px;height:auto;opacity:.12;pointer-events:none;filter:blur(.2px);mix-blend-mode:screen}
+@media(max-width:900px){#hero .hero-wm{display:block;right:-22vw;height:62vh;opacity:.06}.brand-mark-bg{right:-14%;width:62vw;opacity:.035}.lstamp{padding-left:46px}.footer-symbol{width:170px;right:-30px;opacity:.08}.sc::before{width:42px;height:42px}.fc-logo{height:28px}}
+
 </style>
 </head>
 <body>
@@ -815,6 +835,12 @@ footer{padding:56px 60px 28px;border-top:1px solid rgba(201,149,58,.1);backgroun
 </footer>
 
 <script>
+
+window.IMPERVIA_SYMBOL_SRC='./assets/impervia-symbol-gold.png';
+document.querySelectorAll('.hero-wm,.section-wm,.cs-logo,.lstamp img').forEach(img=>{img.src=window.IMPERVIA_SYMBOL_SRC;img.alt='Impervia symbol';});
+document.querySelectorAll('section:not(#hero)').forEach(sec=>{if(!sec.querySelector(':scope > .brand-mark-bg'))sec.insertAdjacentHTML('afterbegin',`<img class="brand-mark-bg" src="${window.IMPERVIA_SYMBOL_SRC}" alt="" aria-hidden="true">`);});
+const footerEl=document.querySelector('footer');
+if(footerEl&&!footerEl.querySelector('.footer-symbol'))footerEl.insertAdjacentHTML('afterbegin',`<img class="footer-symbol" src="${window.IMPERVIA_SYMBOL_SRC}" alt="" aria-hidden="true">`);
 window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('sc',scrollY>50));
 const navToggle=document.querySelector('.nav-toggle');
 const navEl=document.getElementById('nav');
@@ -825,7 +851,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeNav();});
 (()=>{const o=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('v')),{threshold:.06});document.querySelectorAll('.rev').forEach(r=>o.observe(r));})();
 
 // FLEET — branded aircraft cards with graceful local fallback
-const LOGO_SRC=document.querySelector('.nav-logo-img')?.src||'';
+const LOGO_SRC=window.IMPERVIA_SYMBOL_SRC||document.querySelector('.nav-logo-img')?.src||'';
 const FL=[
   {id:'cj3',name:'Cessna Citation CJ3',cat:'Light Jet',sp:'6 pax · 2,040 km',pr:'From $3,800/hr',spd:745,rate:3800,max:6,img:'./assets/aircraft/cessna-citation-cj3.jpg'},
   {id:'xls',name:'Cessna Citation XLS+',cat:'Midsize Jet',sp:'8 pax · 3,700 km',pr:'From $5,500/hr',spd:800,rate:5500,max:8,img:'./assets/aircraft/cessna-citation-xls-plus.jpg'},
