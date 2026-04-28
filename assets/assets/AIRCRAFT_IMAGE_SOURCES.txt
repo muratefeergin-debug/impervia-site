@@ -1,0 +1,8 @@
+Impervia aviation image sources
+
+Aircraft imagery is model-specific where practical. Clean manufacturer media is used for Cessna Citation and AW139; model-matched Wikimedia Commons imagery is used for Gulfstream, Bombardier, Dassault Falcon, and Airbus ACJ references. Website card crops are set so operator names and tail/registration numbers are not visible in the final layout.
+
+Primary source families:
+- Textron Aviation media assets for Cessna Citation CJ3, XLS+, and Sovereign.
+- Leonardo Helicopters media asset for AW139.
+- Wikimedia Commons model-specific aircraft references for Gulfstream, Bombardier, Dassault Falcon, and Airbus ACJ319.
