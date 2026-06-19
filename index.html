@@ -291,6 +291,7 @@ section{padding:112px 60px}
 footer{padding:56px 60px 28px;border-top:1px solid rgba(201,149,58,.1);background:var(--black)}
 .foot-bar{display:flex;align-items:center;gap:20px;margin-bottom:44px;padding-bottom:28px;border-bottom:1px solid rgba(201,149,58,.1)}
 .foot-bar img{height:48px;width:auto}
+.foot-bar img{display:none!important}
 .foot-tag{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:var(--gold-hi)}
 .ftg{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:60px;margin-bottom:36px}
 .fd{font-size:12px;line-height:1.8;color:var(--subtle);max-width:280px}
@@ -322,6 +323,7 @@ footer{padding:56px 60px 28px;border-top:1px solid rgba(201,149,58,.1);backgroun
 @media(max-width:900px){.mobile-menu{position:fixed;top:78px;left:20px;right:20px;z-index:500;display:flex;flex-direction:column;background:#080806;border:1px solid rgba(201,149,58,.32);box-shadow:0 24px 80px rgba(0,0,0,.68);opacity:0;transform:translateY(-12px);pointer-events:none;transition:opacity .25s,transform .25s}.mobile-menu a{padding:16px 20px;border-bottom:1px solid rgba(201,149,58,.1);font-size:11px;letter-spacing:2.4px;text-transform:uppercase;text-decoration:none;color:#e8e3d8}.mobile-menu a:last-child{border-bottom:none;color:#080806;background:var(--gg);text-align:center}body.nav-open .mobile-menu{opacity:1;transform:translateY(0);pointer-events:auto}}
 @media(max-width:600px){.ret,.joyst,.ast{grid-template-columns:1fr}.ftg{grid-template-columns:1fr}.fb{flex-direction:column;gap:14px;text-align:center}.flg{grid-template-columns:1fr}.sg{grid-template-columns:1fr}}
 @media(max-width:600px){.ztr-products,.ztr-specs{grid-template-columns:1fr}.ztr-img{height:210px}}
+@media(max-width:600px){.sc{padding:44px 28px;background:rgba(255,255,255,.026);border-color:rgba(201,149,58,.16)}.scn{font-size:62px;color:rgba(201,149,58,.18);margin-bottom:24px}.sct{font-size:17px;line-height:1.45;letter-spacing:2.6px;color:#fffaf0;margin-bottom:12px}.scs{font-size:10px;line-height:1.8;letter-spacing:2.5px;color:#d7ad55;margin-bottom:22px}.scd{font-size:15px;line-height:1.9;color:rgba(248,245,237,.78);margin-bottom:28px}.scl{gap:11px}.scl li{font-size:13px;line-height:1.65;color:rgba(248,245,237,.72);padding-left:22px}.scl li::before{color:#d7ad55}}
 
 
 /* PATRON REQUEST: wordless symbol presence */
@@ -361,6 +363,17 @@ footer{position:relative;overflow:hidden}
 
 /* Keep section headers clean: one visible wordless mark only */
 .brand-mark-bg,.section-wm{display:none!important;opacity:0!important;visibility:hidden!important}
+
+/* Readability pass: stronger contrast across all descriptive copy */
+body{color:#eee9df}
+.nav-tagline,.nl a,.lstamp-sub,.asl,.fcsp,.rl,.joysl,.foundt{color:#bdb6aa}
+.hsb,.ab p,.reb p,.cs-text,.avb p,.deflead p,.joyb p,.foundb,.inqin p{color:rgba(248,245,237,.78);font-weight:300}
+.ap p,.scd,.scl li,.rest p,.retd,.avsc p,.rno,.ztr-d,.ztr-spec span,.defd,.joyft li,.fti,.fbtg,.inqcv,.fd,.fl a{color:rgba(248,245,237,.72)}
+.scs,.aviation-powered,.ey{color:#d7ad55}
+.fi,.fse,.fte{color:#f8f5ed;background:rgba(255,255,255,.028);border-color:rgba(201,149,58,.18)}
+.fi::placeholder,.fte::placeholder{color:rgba(248,245,237,.48)}
+@media(max-width:900px){.hsb,.ab p,.reb p,.cs-text,.avb p,.deflead p,.joyb p,.foundb,.inqin p{font-size:16px;line-height:1.9}.ap p,.rest p,.retd,.avsc p,.ztr-d,.defd,.fd,.fl a{font-size:14px;line-height:1.85}.fti,.joyft li,.inqcv{font-size:14px;line-height:1.75}.rno{font-size:13px;color:rgba(248,245,237,.72)}}
+@media(max-width:600px){body{font-weight:350}.ey{font-size:11px;color:#d7ad55}.hsb,.ab p,.reb p,.cs-text,.avb p,.deflead p,.joyb p,.foundb,.inqin p{font-size:16px;color:rgba(248,245,237,.82)}.ap p,.rest p,.retd,.avsc p,.ztr-d,.defd,.fd{font-size:14px;color:rgba(248,245,237,.76)}.nav-tagline,.nl a,.lstamp-sub,.asl,.fcsp,.rl,.joysl,.foundt{color:#c6beb0}.fbtg,.fti,.joyft li,.inqcv,.fl a{color:rgba(248,245,237,.74)}.fco,.fleg a,.img-credits{color:rgba(248,245,237,.55)}}
 
 </style>
 </head>
@@ -863,7 +876,6 @@ window.IMPERVIA_SYMBOL_SRC='./assets/impervia-symbol-gold.png';
 document.querySelectorAll('.hero-wm,.section-wm,.cs-logo,.lstamp img').forEach(img=>{img.src=window.IMPERVIA_SYMBOL_SRC;img.alt='Impervia symbol';});
 // Section background marks are intentionally disabled to avoid duplicate logos in headers.
 const footerEl=document.querySelector('footer');
-if(footerEl&&!footerEl.querySelector('.footer-symbol'))footerEl.insertAdjacentHTML('afterbegin',`<img class="footer-symbol" src="${window.IMPERVIA_SYMBOL_SRC}" alt="" aria-hidden="true">`);
 window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('sc',scrollY>50));
 const navToggle=document.querySelector('.nav-toggle');
 const navEl=document.getElementById('nav');
